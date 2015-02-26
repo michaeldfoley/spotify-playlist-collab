@@ -1,0 +1,12 @@
+nav.navbar(ng-controller='NavbarCtrl')
+  a(href='https://github.com/Swiip/generator-gulp-angular') Gulp Angular
+  ul
+    li(ng-class="{ active: isActive('/')}")
+      a(ng-href='/') Home
+    li(ng-class="{ active: isActive('/playlist')}")
+      a(ng-href='/playlist') Playlist
+    li(ng-class="{ active: isActive('/contact')}")
+      a(ng-href='/contact') Contact
+  ul
+    li
+      a(ng-href='/') Current date: {{ date | date:'yyyy-MM-dd' }}

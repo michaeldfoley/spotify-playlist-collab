@@ -1,0 +1,28 @@
+//== Typography
+//
+//## Font, line-height, and color for body text, headings, and more.
+
+$font-family-sans-serif:  "proxima-nova-condensed", Arial, sans-serif !default;
+$font-family-serif:       Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Georgia, serif !default;
+$font-family-monospace:   Menlo, Monaco, Consolas, "Courier New", monospace !default;
+$font-family-base:        $font-family-sans-serif !default;
+
+$font-size-base:          16px !default;
+$font-size-large:         1.5em !default;
+$font-size-small:         0.85em !default;
+
+$font-size-h1:            8em !default;
+$font-size-h2:            $font-size-h1/1.618 !default;
+$font-size-h3:            $font-size-h2/1.618 !default;
+$font-size-h4:            $font-size-h3/1.618 !default;
+$font-size-h5:            $font-size-base !default;
+$font-size-h6:            ceil(($font-size-base * 0.85)) !default;
+
+
+$line-height-base:        1.6 !default;
+$line-height-computed:    floor(($font-size-base * $line-height-base)) !default;
+
+$headings-font-family:    inherit !default;
+$headings-font-weight:    500 !default;
+$headings-line-height:    1.1 !default;
+$headings-color:          inherit !default;

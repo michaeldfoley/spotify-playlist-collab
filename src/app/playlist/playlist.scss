@@ -1,0 +1,108 @@
+.playlist {
+  padding-left: 0;
+  list-style: none;
+}
+.playlist-item {
+  display: flex;
+  border-bottom: 1px solid #D8D8D8;
+  padding: 20px 0;
+  
+  h4 {
+    margin: 0 0 5px;
+  }
+  
+  .thumb {
+    width:64px;
+    margin-right: 30px;
+    position:relative;
+    cursor: pointer;
+    
+    img {
+      display: block;
+      margin:0 auto;
+    }
+    
+    &:before,
+    &:after {
+      box-sizing: border-box;
+      content: ' ';
+      display: block;
+      position: absolute;
+      @include transition(opacity 0.25s ease);
+      opacity: 0;
+    }
+    &:before {
+      background: rgba(0,0,0,0.7);
+      top: 0;
+      left: 0;
+      width: 32px;
+      height: 32px;
+      margin: 16px;
+      border-radius: 100%;
+    }
+    &:after {
+      top: 23px;
+      left: 29px;
+      width: 0;
+      height: 0;
+      border-color: transparent;
+      border-style: solid;
+      border-top-width: 9px;
+      border-bottom-width: 9px;
+      border-left-width: 9px;
+      border-left-color: rgba(255,255,255,0.9);
+    }
+  }
+  
+  .artists {
+    font-size: 1.15em;
+    line-height: 1.2;
+    color: #828282;
+  }
+}    
+.paused .thumb,
+.playlist-item .thumb:hover {
+  &:before,
+  &:after {
+    opacity: 1;
+  }
+}
+    
+.playing .thumb {
+  &:before,
+  &:after {
+    opacity: 1;
+  }
+  &:after {
+    height: 16px;
+    width: 12px;
+    top: 24px;
+    left: 26px;
+    border-width:0 4px;
+    border-color: rgba(255,255,255,0.9);
+    @include animation(spin 3.636363s linear infinite);
+  }
+  &:hover:after {
+    @include animation(none)
+  }
+}
+
+.no-preview .thumb {
+  cursor: default;
+  
+  &, &:hover {
+    &:before,
+    &:after {
+      opacity: 0;
+    }
+  }
+}
+
+@include keyframes(spin) {
+  from {
+    @include transform(rotate(0deg));
+  }
+  to {
+    @include transform(rotate(360deg));
+  }
+}

@@ -1,0 +1,19 @@
+.container
+  div(ng-include="'components/navbar/navbar.html'")
+  button(ng-click="login()", ng-hide="token") Login
+  
+  form.song-search(name="songSearch", ng-submit="search()", novalidate)
+    .form-group
+      label(for="songQuery") Add a song to the playlist
+      input(type="text", id="songQuery", ng-model="songQuery")
+  
+  
+  ul.playlist(ng-show="songs")
+    li.playlist-item(ng-repeat="song in songs", ng-class="{playing: isPlaying && isMySong(song.track), paused: !isPlaying && isMySong(song.track), 'no-preview': !song.track.preview_url}")
+      .thumb(ng-click="setAudio(song.track)")
+        img(ng-src="{{song.track.album.images[2].url}}")
+      .info
+        h4 {{song.track.name}}
+        .artists
+          div(ng-repeat="artist in song.track.artists")
+            {{artist.name}}
