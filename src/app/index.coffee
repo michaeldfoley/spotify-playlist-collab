@@ -1,5 +1,5 @@
 angular.module 'spotifyPlaylistCollab', ['ngAnimate', 'ngRoute', 'spotify']
-  .config ($routeProvider, $locationProvider, SpotifyProvider) ->
+  .config ($routeProvider, $locationProvider, SpotifyProvider, $httpProvider) ->
     $routeProvider
       .when '/',
         templateUrl: 'app/main/main.html'
@@ -15,3 +15,5 @@ angular.module 'spotifyPlaylistCollab', ['ngAnimate', 'ngRoute', 'spotify']
     SpotifyProvider.setScope ''
     
     $locationProvider.html5Mode true
+    
+    $httpProvider.interceptors.push('authHttpResponseInterceptor')

@@ -1,19 +1,24 @@
 angular.module "spotifyPlaylistCollab"
-  .controller 'PlaylistCtrl', ($scope, $sce, Spotify) ->
+  .controller 'PlaylistCtrl', ($rootScope, $scope, $sce, Spotify) ->
     $scope.userId = 'michaeldfoley'
     $scope.playlistId = '5L5t7NUqA9xL1wvUFIoaYl'
-    $scope.token = ''
+    $rootScope.token = localStorage.getItem('spotify-token');
     $scope.audio = new Audio()
     $scope.isPlaying = false
+    
+    $scope.init = ->
+      if $rootScope.token
+        Spotify.setAuthToken($rootScope.token)
+        $scope.getPlaylist()
     
     $scope.login = () ->
       Spotify.login()
       .then (data) ->
-        $scope.token = data
+        $rootScope.token = data
         $scope.getPlaylist()
     
     $scope.getPlaylist = () ->
-      if $scope.token
+      if $rootScope.token
         Spotify.getPlaylistTracks($scope.userId, $scope.playlistId)
           .then (data) ->
             $scope.songs = data.items
