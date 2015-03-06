@@ -42,3 +42,43 @@
     }
   }
 }
+
+.popularity {
+  position:relative;
+  overflow: hidden;
+  height: ($line-height-computed - 14);
+  margin: 6px 0;
+  
+  &:after {
+    content: '';
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(to right,
+      transparent 0%,  transparent 7%,  white 7%,  white 10%,
+      transparent 10%, transparent 17%, white 17%, white 20%,
+      transparent 20%, transparent 27%, white 27%, white 30%,
+      transparent 30%, transparent 37%, white 37%, white 40%,
+      transparent 40%, transparent 47%, white 47%, white 50%,
+      transparent 50%, transparent 57%, white 57%, white 60%,
+      transparent 60%, transparent 67%, white 67%, white 70%,
+      transparent 70%, transparent 77%, white 77%, white 80%,
+      transparent 80%, transparent 87%, white 87%, white 90%,
+      transparent 90%, transparent 97%, white 97%, white 100%);
+  }
+}
+
+// Bar of progress
+.popularity-bar {
+  float: left;
+  width: 0%;
+  height: 100%;
+  font-size: $font-size-small;
+  line-height: $line-height-computed;
+  color: white;
+  text-align: center;
+  background-color: $primary;
+  box-shadow: inset 0 -1px 0 rgba(0,0,0,.15);
+}
+

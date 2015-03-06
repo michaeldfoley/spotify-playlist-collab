@@ -18,7 +18,9 @@
               {{artist.name}}
         .meta
           .time {{item.duration_ms | mstotime}}
-          .popularity {{item.popularity}}
+          .popularity 
+            .popularity-bar(aria-valuenow="{{item.popularity}}", aria-valuemin="0", aria-valuemax="100", style="width: {{item.popularity}}%;")
+              .sr-only Popularity {{item.popularity}}%
   
   ul.playlist(ng-show="songs")
     li.playlist-item(ng-repeat="song in songs", ng-class="{playing: isPlaying && isMySong(song.track), paused: !isPlaying && isMySong(song.track), 'no-preview': !song.track.preview_url}")
