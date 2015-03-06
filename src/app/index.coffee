@@ -2,7 +2,8 @@ angular.module 'spotifyPlaylistCollab', [
   'ngAnimate',
   'ngRoute',
   'spotify',
-  'ui.unique']
+  'ui.unique',
+  'offClick']
   .config [
     '$routeProvider',
     '$locationProvider',
