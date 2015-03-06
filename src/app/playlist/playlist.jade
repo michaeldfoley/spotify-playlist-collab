@@ -5,8 +5,20 @@
   form.song-search(name="songSearch", ng-submit="search()", novalidate)
     .form-group
       label(for="songQuery") Add a song to the playlist
-      input(type="text", id="songQuery", ng-model="songQuery")
-  
+      input(type="search", id="songQuery", ng-model="songQuery", placeholder="Search for a song, artist, or album")
+      
+    ul.search-results#searchResults(ng-show="searchResults")
+      li.search-item(ng-repeat="item in searchResults.items | unique:'external_ids.isrc'", ng-class="{playing: isPlaying && isMySong(item), paused: !isPlaying && isMySong(item), 'no-preview': !item.preview_url}", on-finish-render="ngRepeatFinished")
+        .thumb(ng-click="setAudio(item)")
+          img(ng-src="{{item.album.images[2].url}}")
+        .info
+          .title {{item.name}}
+          ul.artists
+            li(ng-repeat="artist in item.artists")
+              {{artist.name}}
+        .meta
+          .time {{item.duration_ms | mstotime}}
+          .popularity {{item.popularity}}
   
   ul.playlist(ng-show="songs")
     li.playlist-item(ng-repeat="song in songs", ng-class="{playing: isPlaying && isMySong(song.track), paused: !isPlaying && isMySong(song.track), 'no-preview': !song.track.preview_url}")
@@ -14,6 +26,6 @@
         img(ng-src="{{song.track.album.images[2].url}}")
       .info
         h4 {{song.track.name}}
-        .artists
-          div(ng-repeat="artist in song.track.artists")
+        ul.artists
+          li(ng-repeat="artist in song.track.artists")
             {{artist.name}}

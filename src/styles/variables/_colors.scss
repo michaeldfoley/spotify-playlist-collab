@@ -1,0 +1,11 @@
+//== Colors
+//
+
+$gray-base:              #000 !default;
+$gray-darker:            lighten($gray-base, 15%) !default; // #262626
+$gray-dark:              lighten($gray-base, 29%) !default;   // #4a4a4a
+$gray:                   lighten($gray-base, 40%) !default; // #666
+$gray-light:             lighten($gray-base, 53.5%) !default; // #888
+$gray-lighter:           lighten($gray-base, 93.5%) !default; // #eee
+
+$primary:                #00594F;

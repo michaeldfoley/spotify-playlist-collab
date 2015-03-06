@@ -1,0 +1,44 @@
+.song-search {
+  position: relative;
+  width: 70%;
+  margin: 0 auto 45px;
+  
+  .form-group {
+    margin-bottom: 0;
+  }
+  
+  label {
+    display: block;
+    font-size: $font-size-h4;
+    text-align: center;
+  }
+}
+
+.search-results {
+  position: absolute;
+  overflow-y: scroll;
+  max-height: 300px;
+  width: 100%;
+  width: calc(100% - 30px);
+  margin: 10px 15px 0;
+  padding: 10px 30px 0;
+  border: 1px solid #ccc;
+  background: white;
+  list-style: none;
+}
+.search-item {
+  .title {
+    font-size: 1.3em;
+    flex: 1 100%;
+  }
+  
+  .meta {
+    width: 64px;
+    flex: 0 0 64px;
+    margin-left: 30px;
+    
+    .time {
+      line-height: 1.3*$font-size-base*$line-height-base;
+    }
+  }
+}
