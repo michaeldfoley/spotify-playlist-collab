@@ -7,7 +7,6 @@
   
   display: flex;
   flex-flow: row wrap;
-  padding: 20px 0;
   
   &:last-child {
     border-bottom: none;
@@ -80,6 +79,7 @@
 }
 .playlist-item {
   border-bottom: 1px solid #D8D8D8;
+  padding: 20px 0;
   
   h4 {
     margin: 0 0 5px;
