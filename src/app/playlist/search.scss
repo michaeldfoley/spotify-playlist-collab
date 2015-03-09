@@ -16,6 +16,7 @@
 
 .search-results {
   position: absolute;
+  overflow-x: hidden;
   overflow-y: scroll;
   max-height: 300px;
   width: 100%;
@@ -27,6 +28,35 @@
   list-style: none;
 }
 .search-item {
+  border-bottom: 1px solid #D8D8D8;
+  background: white;
+  position:relative;
+  
+  &:before {
+    content: '';
+    box-sizing: content-box;
+    display: block;
+    position: absolute;
+    top: -1px;
+    left: -30px;
+    width: 120%;
+    height: 100%;
+    padding: 1px 0;
+  }
+  
+  &:hover {
+    cursor: pointer;
+    
+    &:before {
+      background: $gray-lighter;
+    }
+  }
+  
+  .meta,
+  .info {
+    z-index: 1;
+  }
+  
   .title {
     font-size: 1.3em;
     flex: 1 100%;
@@ -66,6 +96,20 @@
       transparent 70%, transparent 77%, white 77%, white 80%,
       transparent 80%, transparent 87%, white 87%, white 90%,
       transparent 90%, transparent 97%, white 97%, white 100%);
+      
+      .search-item:hover & {
+        background-image: linear-gradient(to right,
+          transparent 0%,  transparent 7%,  $gray-lighter 7%,  $gray-lighter 10%,
+          transparent 10%, transparent 17%, $gray-lighter 17%, $gray-lighter 20%,
+          transparent 20%, transparent 27%, $gray-lighter 27%, $gray-lighter 30%,
+          transparent 30%, transparent 37%, $gray-lighter 37%, $gray-lighter 40%,
+          transparent 40%, transparent 47%, $gray-lighter 47%, $gray-lighter 50%,
+          transparent 50%, transparent 57%, $gray-lighter 57%, $gray-lighter 60%,
+          transparent 60%, transparent 67%, $gray-lighter 67%, $gray-lighter 70%,
+          transparent 70%, transparent 77%, $gray-lighter 77%, $gray-lighter 80%,
+          transparent 80%, transparent 87%, $gray-lighter 87%, $gray-lighter 90%,
+          transparent 90%, transparent 97%, $gray-lighter 97%, $gray-lighter 100%);
+      }
   }
 }
 
