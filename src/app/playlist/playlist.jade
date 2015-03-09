@@ -5,7 +5,7 @@
   form.song-search(name="songSearch", ng-submit="search()", novalidate)
     .form-group
       label(for="songQuery") Add a song to the playlist
-      input(type="search", id="songQuery", ng-model="songQuery", placeholder="Search for a song, artist, or album")
+      input(type="search", id="songQuery", ng-model="songQuery", ng-keyup="keyCallback($event)", placeholder="Search for a song, artist, or album")
       
     ul.search-results#searchResults(ng-show="searchResults", off-click="closeSearch()", off-click-if="searchResults")
       li.search-item(ng-repeat="item in searchResults.items | unique:'external_ids.isrc'", ng-class="{playing: isPlaying && isMySong(item), paused: !isPlaying && isMySong(item), 'no-preview': !item.preview_url}", on-finish-render="ngRepeatFinished")
