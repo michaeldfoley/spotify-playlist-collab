@@ -11,6 +11,7 @@ angular.module "spotifyPlaylistCollab"
       $scope.audio = new Audio()
       $scope.isPlaying = false
       $scope.songQuery = ''
+      $scope.lastSearched = ''
       
       $scope.init = ->
         if $rootScope.token
@@ -63,22 +64,14 @@ angular.module "spotifyPlaylistCollab"
       
       
       $scope.search = ->
-        Spotify.search($scope.songQuery+'*', 'track')
-          .then (data) ->
-            if data.tracks.items.length > 0
-              $scope.searchResults = data.tracks
-            else
-              $scope.searchResults = null
-      
-      $scope.keyCallback = ($event)->
-        if $event.keyCode == 27
-          $scope.songQuery = ''
-          
-        if $event.keyCode != 13
-          if $scope.songQuery.length > 2
-            $scope.search()
-          else
-            $scope.searchResults = null
+        if $scope.songQuery != $scope.lastSearched
+          $scope.lastSearched = $scope.songQuery
+          Spotify.search($scope.songQuery+'*', 'track')
+            .then (data) ->
+              if data.tracks.items.length > 0
+                $scope.searchResults = data.tracks
+              else
+                $scope.searchResults = null
             
       $scope.closeSearch = ->
         $scope.searchResults = null
