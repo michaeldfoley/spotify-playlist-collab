@@ -52,6 +52,15 @@
     }
   }
   
+  &.empty {
+    margin-top: -10px;
+    cursor: auto;
+    
+    &:before {
+      content: none;
+    }
+  }
+  
   .meta,
   .info {
     z-index: 1;

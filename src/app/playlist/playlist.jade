@@ -6,8 +6,9 @@
     .form-group
       label(for="songQuery") Add a song to the playlist
       input(type="search", id="songQuery", ng-model="songQuery", ng-change="search()", ng-model-options="{ debounce: 300 }", placeholder="Search for a song, artist, or album")
-      
+     
     ul.search-results#searchResults(ng-show="searchResults", off-click="closeSearch()", off-click-if="searchResults")
+      li.search-item.empty(ng-hide="searchResults.items.length") Sorry, no results.
       li.search-item(ng-repeat="item in searchResults.items | unique:'external_ids.isrc'", ng-class="{playing: isPlaying && isMySong(item), paused: !isPlaying && isMySong(item), 'no-preview': !item.preview_url}", on-finish-render="ngRepeatFinished")
         .thumb(ng-click="setAudio(item)")
           img(ng-src="{{item.album.images[2].url}}")

@@ -68,13 +68,11 @@ angular.module "spotifyPlaylistCollab"
           $scope.searchResults = null
           
         else if $scope.songQuery != $scope.lastSearched
-          $scope.lastSearched = $scope.songQuery
           Spotify.search($scope.songQuery+'*', 'track')
             .then (data) ->
-              if data.tracks.items.length > 0
-                $scope.searchResults = data.tracks
-              else
-                $scope.searchResults = null
+              $scope.searchResults = data.tracks
+        
+        $scope.lastSearched = $scope.songQuery
             
       $scope.closeSearch = ->
         $scope.searchResults = null
