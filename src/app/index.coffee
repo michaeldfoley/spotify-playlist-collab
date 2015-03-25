@@ -1,5 +1,4 @@
 angular.module 'spotifyPlaylistCollab', [
-  'ngAnimate',
   'ngRoute',
   'spotify',
   'ui.unique',
