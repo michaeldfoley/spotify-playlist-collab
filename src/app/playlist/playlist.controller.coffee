@@ -76,6 +76,10 @@ angular.module "spotifyPlaylistCollab"
             
       $scope.closeSearch = ->
         $scope.searchResults = null
+        $scope.removeAudio()
+      
+      $scope.add = ->
+        console.log 'clicked'
 
       $scope.$on 'ngRepeatFinished', (ngRepeatFinishedEvent) -> resizeSearchResults()
   ]
