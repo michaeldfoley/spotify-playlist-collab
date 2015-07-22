@@ -85,8 +85,12 @@ angular.module "spotifyPlaylistCollab"
       $scope.inPlaylist = (value)->
         $scope.songIds.indexOf(value) > -1
       
-      $scope.add = ->
-        console.log 'clicked'
+      $scope.add = (song)->
+        if $rootScope.token
+          Spotify.addPlaylistTracks($scope.userId, $scope.playlistId, song.uri)
+            .then (data)->
+              $scope.getPlaylist()
+              $scope.closeSearch()
 
       $scope.$on 'ngRepeatFinished', (ngRepeatFinishedEvent) -> resizeSearchResults()
   ]

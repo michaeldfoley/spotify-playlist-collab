@@ -22,7 +22,7 @@ angular.module 'spotifyPlaylistCollab', [
           
       SpotifyProvider.setClientId '37026114ba074d349b5badec6bda2844'
       SpotifyProvider.setRedirectUri 'http://localhost:3000/spotify-callback.html'
-      SpotifyProvider.setScope ''
+      SpotifyProvider.setScope 'playlist-modify-private'
       
       $locationProvider.html5Mode true
       
