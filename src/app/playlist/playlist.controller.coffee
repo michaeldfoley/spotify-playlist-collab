@@ -12,6 +12,7 @@ angular.module "spotifyPlaylistCollab"
       $scope.isPlaying = false
       $scope.songQuery = ''
       $scope.lastSearched = ''
+      $scope.songIds = []
       
       $scope.init = ->
         if $rootScope.token
@@ -29,6 +30,9 @@ angular.module "spotifyPlaylistCollab"
           Spotify.getPlaylistTracks($scope.userId, $scope.playlistId)
             .then (data) ->
               $scope.songs = data.items
+              angular.forEach($scope.songs, (item, key)->
+                $scope.songIds.push(item.track.external_ids.isrc)
+              )
       
       $scope.isMySong = (song) ->
         song.preview_url == $scope.audio.src
@@ -76,7 +80,17 @@ angular.module "spotifyPlaylistCollab"
             
       $scope.closeSearch = ->
         $scope.searchResults = null
-        $scope.lastSearched = ''
+        $scope.removeAudio()
+      
+      $scope.inPlaylist = (value)->
+        $scope.songIds.indexOf(value) > -1
+      
+      $scope.add = (song)->
+        if $rootScope.token
+          Spotify.addPlaylistTracks($scope.userId, $scope.playlistId, song.uri)
+            .then (data)->
+              $scope.getPlaylist()
+              $scope.closeSearch()
 
       $scope.$on 'ngRepeatFinished', (ngRepeatFinishedEvent) -> resizeSearchResults()
   ]
