@@ -49,40 +49,32 @@
 
 // Slide results left and show indicator on hover or if in playlist
 .search-result {
-  &:before {
-    content:'';
-    background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='20px' height='20px'><path d='M8.1,0v8.1H0v3.8h8.1V20h3.8v-8.1H20V8.1h-8.1V0H8.1z'/></svg>") left center no-repeat;
-    width: 20px;
-    margin: 0 15px 0 -35px;
-    float: left;
-    opacity: 0;
-  }
   .song-info {
-    margin-right: 35px;  // should be the absoulte of the :before left margin to prevent wrapping when you slide it over
+    &:before {
+      content:'';
+      background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='20px' height='20px'><path d='M8.1,0v8.1H0v3.8h8.1V20h3.8v-8.1H20V8.1h-8.1V0H8.1z'/></svg>") left center no-repeat;
+      width: 35px;
+      height: 60px;
+      margin-left: -35px;
+      float: left;
+      opacity: 0;  
+    }
+  }
+  .song-info,
+  .song-info:before {
+    @include transition(all .1s ease-out);
+  }
+  .song-info:hover:before {
+    margin-left: 0;
+    opacity: 1;
   }
 }
-.in-playlist:before {
+.in-playlist .song-info:before {
   background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='20px' height='17.3px'><path d='M6.9,17.3L0,10.6l2.7-2.8l3.5,3.4c2.2-3.2,7-9.2,12.5-11.3L20,3.6C13.9,5.9,8.2,15.1,8.2,15.2L6.9,17.3z'/></svg>") left center no-repeat;
 
 }
-
-.search-result:hover,
-.in-playlist {
-  &:before {
-    opacity: 1;
-    margin-left: 0;
-  }
-  .song-info {
-    margin-right: 0;
-  }
-}
 .search-result:hover {
   cursor: pointer;
-  
-  &:before,
-  .song-info {
-    @include transition(all .1s ease-out);
-  }
 }
 .in-playlist:hover {
   cursor: default;
