@@ -4,11 +4,12 @@ angular.module "spotifyPlaylistCollab"
     '$scope',
     '$timeout',
     'Spotify',
-    ($rootScope, $scope, $timeout, Spotify) ->
+    'audio',
+    ($rootScope, $scope, $timeout, Spotify, audio) ->
       $scope.userId = 'michaeldfoley'
       $scope.playlistId = '5L5t7NUqA9xL1wvUFIoaYl'
       $rootScope.token = localStorage.getItem('spotify-token')
-      $scope.audio = new Audio()
+      $scope.audio = audio
       $scope.isPlaying = false
       $scope.songQuery = ''
       $scope.lastSearched = ''
