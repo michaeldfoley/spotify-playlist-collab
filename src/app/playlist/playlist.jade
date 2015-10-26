@@ -10,7 +10,7 @@
     ul.search-results#searchResults(ng-show="searchResults", off-click="closeSearch()", off-click-if="searchResults")
       li.search-result.song.empty(ng-hide="searchResults.items.length") Sorry, no results.
       li.search-result.song(ng-repeat="item in searchResults.items | unique:'external_ids.isrc'", ng-class="{playing: isPlaying && isMySong(item), paused: !isPlaying && isMySong(item), 'no-preview': !item.preview_url, 'in-playlist': inPlaylist(item.external_ids.isrc)}", on-finish-render="ngRepeatFinished", ng-click="add(item)")
-        .song-thumb(ng-click="setAudio(item)")
+        .song-thumb(ng-click="player.toggle(item)")
           img(ng-src="{{item.album.images[2].url}}")
         .song-info
           .song-title {{item.name}}
@@ -24,8 +24,8 @@
               .sr-only Popularity {{item.popularity}}%
   
   ul.playlist(ng-show="songs")
-    li.song(ng-repeat="song in songs", ng-class="{playing: isPlaying && isMySong(song.track), paused: !isPlaying && isMySong(song.track), 'no-preview': !song.track.preview_url}")
-      .song-thumb(ng-click="setAudio(song.track)")
+    li.song(ng-repeat="song in songs", ng-class="{playing: player.isPlaying && player.isCurrent(song.track.preview_url), paused: !player.isPlaying && player.isCurrent(song.track.preview_url), 'no-preview': !song.track.preview_url}")
+      .song-thumb(ng-click="player.toggle(song.track)")
         img(ng-src="{{song.track.album.images[2].url}}")
       .song-info
         h4.song-title {{song.track.name}}

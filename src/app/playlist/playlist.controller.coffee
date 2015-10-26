@@ -5,12 +5,12 @@ angular.module "spotifyPlaylistCollab"
     '$timeout',
     'Spotify',
     'audio',
-    ($rootScope, $scope, $timeout, Spotify, audio) ->
+    'player',
+    ($rootScope, $scope, $timeout, Spotify, audio, player) ->
       $scope.userId = 'michaeldfoley'
       $scope.playlistId = '5L5t7NUqA9xL1wvUFIoaYl'
       $rootScope.token = localStorage.getItem('spotify-token')
-      $scope.audio = audio
-      $scope.isPlaying = false
+      $scope.player = player
       $scope.songQuery = ''
       $scope.lastSearched = ''
       $scope.songIds = []
@@ -35,39 +35,6 @@ angular.module "spotifyPlaylistCollab"
                 $scope.songIds.push(item.track.external_ids.isrc)
               )
       
-      $scope.isMySong = (song) ->
-        song.preview_url == $scope.audio.src
-      
-      $scope.setAudio = (song) ->
-        if song.preview_url
-          if !$scope.isMySong(song)
-            $scope.audio.setAttribute("src", song.preview_url)
-            $scope.audio.load()
-            $scope.audio.play()
-            $scope.previewImg = song.album.images[1].url
-            $scope.isPlaying = true
-          else
-            $scope.togglePlay()
-          
-      $scope.removeAudio = ->
-        $scope.audio.setAttribute("src", null)
-        $scope.previewImg = null
-        $scope.isPlaying = false
-      
-      $scope.togglePlay = ->
-        if $scope.audio.paused
-          $scope.audio.play()
-          $scope.isPlaying = true
-        else
-          $scope.audio.pause()
-          $scope.isPlaying = false
-      
-      $scope.audio.addEventListener 'ended', ->
-        $scope.$apply ->
-          $scope.removeAudio()
-      
-      
-      
       $scope.search = ->
         if $scope.songQuery.length < 3
           $scope.searchResults = null
@@ -81,7 +48,7 @@ angular.module "spotifyPlaylistCollab"
             
       $scope.closeSearch = ->
         $scope.searchResults = null
-        $scope.removeAudio()
+        $scope.player.stop()
       
       $scope.inPlaylist = (value)->
         $scope.songIds.indexOf(value) > -1
