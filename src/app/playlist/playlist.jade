@@ -1,21 +1,20 @@
 .container(ng-init="init()")
-  div(ng-include="'components/navbar/navbar.html'")
   button(ng-click="login()", ng-hide="token") Login
   
   form.search(name="songSearch", ng-submit="search()", novalidate)
     .form-group
       label.search-label(for="songQuery") Add a song to the playlist
-      input(type="search", id="songQuery", ng-model="songQuery", ng-change="search()", ng-model-options="{ debounce: 300 }", placeholder="Search for a song, artist, or album")
+      input(type="search", id="songQuery", ng-model="songQuery", ng-change="search()", ng-model-options="{ debounce: 300 }", placeholder="Search for a song, artist, or album", autocomplete="off")
      
     ul.search-results#searchResults(ng-show="searchResults", off-click="closeSearch()", off-click-if="searchResults")
-      li.search-result.song.empty(ng-hide="searchResults.items.length") Sorry, no results.
-      li.search-result.song(ng-repeat="item in searchResults.items | unique:'external_ids.isrc'", ng-class="{playing: player.isPlaying && player.isCurrent(item.preview_url), paused: !player.isPlaying && player.isCurrent(item.preview_url), 'no-preview': !item.preview_url, 'in-playlist': inPlaylist(item.external_ids.isrc)}", on-finish-render="ngRepeatFinished")
-        .song-thumb(ng-click="player.toggle(item)")
+      li.search-result.empty(ng-hide="searchResults.items.length") Sorry, no results.
+      li.search-result(ng-repeat="item in searchResults.items | unique:'external_ids.isrc'", ng-class="{isPlaying: player.isPlaying && player.isCurrent(item.preview_url), isPaused: !player.isPlaying && player.isCurrent(item.preview_url), 'no-preview': !item.preview_url, 'in-playlist': inPlaylist(item.external_ids.isrc)}", on-finish-render="ngRepeatFinished")
+        .search-thumb.song-thumb(ng-click="player.toggle(item)")
           img(ng-src="{{item.album.images[2].url}}")
-        .song-info(ng-click="add(item)")
-          .song-title {{item.name}}
-          ul.artists
-            li.artist(ng-repeat="artist in item.artists")
+        .search-info(ng-click="add(item)")
+          h4.song-title.search-title {{item.name}}
+          ul.search-artists.song-artists
+            li.song-artist(ng-repeat="artist in item.artists")
               {{artist.name}}
         .song-meta(ng-click="add(item)")
           .song-duration {{item.duration_ms | mstotime}}
@@ -24,11 +23,11 @@
               .sr-only Popularity {{item.popularity}}%
   
   ul.playlist(ng-show="songs")
-    li.song(ng-repeat="song in songs", ng-class="{playing: player.isPlaying && player.isCurrent(song.track.preview_url), paused: !player.isPlaying && player.isCurrent(song.track.preview_url), 'no-preview': !song.track.preview_url}")
-      .song-thumb(ng-click="player.toggle(song.track)")
-        img(ng-src="{{song.track.album.images[2].url}}")
-      .song-info
+    li.playlist-item(ng-repeat="song in songs", ng-class="{isPlaying: player.isPlaying && player.isCurrent(song.track.preview_url), isPaused: !player.isPlaying && player.isCurrent(song.track.preview_url), 'no-preview': !song.track.preview_url}")
+      .playlist-thumb.song-thumb(ng-click="player.toggle(song.track)")
+        img(ng-src="{{song.track.album.images[1].url}}")
+      .playlist-info
         h4.song-title {{song.track.name}}
-        ul.artists
-          li.artist(ng-repeat="artist in song.track.artists")
+        ul.song-artists
+          li.song-artist(ng-repeat="artist in song.track.artists")
             {{artist.name}}

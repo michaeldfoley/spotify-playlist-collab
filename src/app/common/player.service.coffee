@@ -27,7 +27,7 @@ angular.module 'spotifyPlaylistCollab'
           player.previewImg = player.current = audio.src = null
       
       isCurrent: (track) ->
-        player.current == track
+        player.current && player.current == track
         
       toggle: (song) ->
         if player.isPlaying && player.isCurrent(song.preview_url)

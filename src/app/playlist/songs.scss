@@ -1,0 +1,67 @@
+//
+// Songs
+// --------------------------------------------------
+
+
+// Song Thumb
+
+.song-thumb {
+  @include play-buttons-defaults();
+}
+
+
+// Hide button no preview
+
+.no-preview .song-thumb {
+  cursor: default;
+  
+  &:before, &:after {
+    opacity: 0;
+  }
+}
+
+
+// Song info
+
+.song-title {
+  margin-bottom: 0;
+}
+
+.song-meta {
+  width: 64px;
+  flex: 0 0 64px;
+  margin-left: 30px;
+}
+
+.song-duration {
+  line-height: 1.3 * $font-size-base*$line-height-base;
+}
+
+
+// Artist
+
+.song-artists {
+  list-style: none;
+  padding: 0;
+  color: $gray-light;
+}
+
+.song-artist {
+  display: inline-block;
+
+  + .song-artist:before {
+    content: ', ';
+  }
+}
+
+
+// Song-related Animations
+
+@include keyframes(spin) {
+  from {
+    @include transform(rotate(0deg));
+  }
+  to {
+    @include transform(rotate(360deg));
+  }
+}

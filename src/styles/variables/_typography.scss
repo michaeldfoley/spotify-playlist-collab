@@ -11,7 +11,7 @@ $font-size-base:          16px !default;
 $font-size-large:         1.5em !default;
 $font-size-small:         0.85em !default;
 
-$font-size-h1:            8em !default;
+$font-size-h1:            5.5em !default;
 $font-size-h2:            $font-size-h1/1.618 !default;
 $font-size-h3:            $font-size-h2/1.618 !default;
 $font-size-h4:            $font-size-h3/1.618 !default;
@@ -23,6 +23,6 @@ $line-height-base:        1.6 !default;
 $line-height-computed:    floor(($font-size-base * $line-height-base)) !default;
 
 $headings-font-family:    inherit !default;
-$headings-font-weight:    500 !default;
+$headings-font-weight:    600 !default;
 $headings-line-height:    1.1 !default;
 $headings-color:          inherit !default;

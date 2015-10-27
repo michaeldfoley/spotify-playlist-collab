@@ -2,22 +2,28 @@
 // Search
 // --------------------------------------------------
 
+
+// Search Container
+
 .search {
   position: relative;
-  width: 70%;
+  max-width: 700px;
   margin: 0 auto 45px;
   
   .form-group {
     margin-bottom: 0;
   }
 }
+
 .search-label {
   display: block;
-  font-size: $font-size-h4;
+  font-size: $font-size-h3;
   text-align: center;
 }
 
+
 // Search Results
+
 .search-results {
   position: absolute;
   overflow-x: hidden;
@@ -30,57 +36,96 @@
   border: 1px solid #ccc;
   background: white;
   list-style: none;
+  z-index: 1;
 }
+
 .search-result {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  padding: 20px 0;
+  border-bottom: 1px solid #D8D8D8;
   background: white;
   position: relative;
-  z-index: 1;
+  cursor: pointer;
+  z-index: $zindex-1;
   
   &.empty {
     margin-top: -10px;
     cursor: auto;
-    
   }
-  .song-title {
-    font-size: 1.3em;
-    flex: 1 100%;
+  
+  &:last-child {
+    border-bottom: none;
   }
 }
 
-// Slide results left and show indicator on hover or if in playlist
-.search-result {
-  .song-info {
+.search-info {
+  flex: 1;
+  position: relative;
+  margin-left: 35px;
+}
+
+.search-title {
+  flex: 1 100%;
+  margin: 0;
+}
+
+.search-thumb {
+  flex: 0 0 64px;
+  z-index: $zindex-1;
+  background-color: $body-bg;
+  
+  @include play-buttons-size(64px, 64px, 32px, true);
+}
+
+
+// Add to playlist indicator
+
+.search-info {
+  &:before {
+    content:'';
+    background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='20px' height='20px'><path d='M8.1,0v8.1H0v3.8h8.1V20h3.8v-8.1H20V8.1h-8.1V0H8.1z'/></svg>") left center no-repeat;
+    width: 20px;
+    height: 20px;
+    opacity: 0;  
+    position: absolute;
+    top: calc(50% - 10px);
+    left: -40px;
+  }
+}
+
+.search-info,
+.search-info:before {
+  @include transition(all .1s ease-out);
+}
+
+.in-playlist,
+.search-result:hover {
+  .search-info {
+    margin-left: 50px;
+    
     &:before {
-      content:'';
-      background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='20px' height='20px'><path d='M8.1,0v8.1H0v3.8h8.1V20h3.8v-8.1H20V8.1h-8.1V0H8.1z'/></svg>") left center no-repeat;
-      width: 35px;
-      height: 60px;
-      margin-left: -35px;
-      float: left;
-      opacity: 0;  
+      left: -35px;
+      opacity: 1;
     }
   }
-  .song-info,
-  .song-info:before {
-    @include transition(all .1s ease-out);
-  }
-  .song-info:hover:before {
-    margin-left: 0;
-    opacity: 1;
-  }
 }
-.in-playlist .song-info:before {
-  background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='20px' height='17.3px'><path d='M6.9,17.3L0,10.6l2.7-2.8l3.5,3.4c2.2-3.2,7-9.2,12.5-11.3L20,3.6C13.9,5.9,8.2,15.1,8.2,15.2L6.9,17.3z'/></svg>") left center no-repeat;
 
-}
-.search-result:hover {
-  cursor: pointer;
-}
-.in-playlist:hover {
+.in-playlist {
   cursor: default;
 }
 
-// Popularity bar
+.in-playlist .search-info:before {
+  background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='20px' height='17.3px'><path d='M6.9,17.3L0,10.6l2.7-2.8l3.5,3.4c2.2-3.2,7-9.2,12.5-11.3L20,3.6C13.9,5.9,8.2,15.1,8.2,15.2L6.9,17.3z'/></svg>") left center no-repeat;
+
+}
+
+
+//
+// Popularity Bar
+// --------------------------------------------------
+
 .popularity {
   position:relative;
   overflow: hidden;
@@ -107,7 +152,6 @@
   }
 }
 
-// Bar of progress
 .popularity-bar {
   float: left;
   width: 0%;
@@ -118,20 +162,4 @@
   text-align: center;
   background-color: $primary;
   box-shadow: inset 0 -1px 0 rgba(0,0,0,.15);
-}
-
-// Animations
-@include keyframes(pushResultsLeft) {
-  0% {
-    margin-left: -40px;
-    opacity: 0;
-  }
-  98% {
-    margin-left: 2px;
-    opacity: 1;
-  }
-  100% {
-    margin-left: 0;
-    opacity: 1;
-  }
 }
