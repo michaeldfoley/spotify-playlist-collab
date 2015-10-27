@@ -28,6 +28,12 @@ angular.module 'spotifyPlaylistCollab'
       
       isCurrent: (track) ->
         player.current && player.current == track
+      
+      thisIsPlaying: (track) ->
+        player.isPlaying && player.isCurrent(track.preview_url)
+      
+      thisIsPaused: (track) ->
+        !player.isPlaying && player.isCurrent(track.preview_url)
         
       toggle: (song) ->
         if player.isPlaying && player.isCurrent(song.preview_url)

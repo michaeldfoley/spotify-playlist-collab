@@ -54,7 +54,7 @@ angular.module "spotifyPlaylistCollab"
         $scope.songIds.indexOf(value) > -1
       
       $scope.add = (song)->
-        if $rootScope.token
+        if $rootScope.token && !$scope.inPlaylist(song.external_ids.isrc)
           Spotify.addPlaylistTracks($scope.userId, $scope.playlistId, song.uri)
             .then (data)->
               $scope.getPlaylist()
