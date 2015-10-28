@@ -9,6 +9,9 @@ angular.module "spotifyPlaylistCollab"
     ($rootScope, $scope, $timeout, Spotify, audio, player) ->
       $scope.userId = 'michaeldfoley'
       $scope.playlistId = '5L5t7NUqA9xL1wvUFIoaYl'
+      $scope.playlistOptions = {
+        fields: 'items(added_at,added_by(id),track(album(images,name),artists(name),external_ids,external_urls,id,name,preview_url))'
+      }
       $rootScope.token = localStorage.getItem('spotify-token')
       $scope.player = player
       $scope.songQuery = ''
@@ -28,7 +31,7 @@ angular.module "spotifyPlaylistCollab"
       
       $scope.getPlaylist = ->
         if $rootScope.token
-          Spotify.getPlaylistTracks($scope.userId, $scope.playlistId)
+          Spotify.getPlaylistTracks($scope.userId, $scope.playlistId, $scope.playlistOptions)
             .then (data) ->
               $scope.songs = data.items
               angular.forEach($scope.songs, (item, key)->
