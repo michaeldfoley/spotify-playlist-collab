@@ -42,7 +42,6 @@ angular.module 'spotifyPlaylistCollab'
           player.play(song)
     
     audio.addEventListener 'ended', () ->
-      console.log 'ended'
       $rootScope.$apply () ->
         player.stop()
     

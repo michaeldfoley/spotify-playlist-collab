@@ -8,22 +8,22 @@
      
     ul.search-results#searchResults(ng-show="searchResults", off-click="closeSearch()", off-click-if="searchResults")
       li.search-result.empty(ng-hide="searchResults.items.length") Sorry, no results.
-      li.search-result(ng-repeat="item in searchResults.items | unique:'external_ids.isrc'", ng-class="{isPlaying: player.thisIsPlaying(item), isPaused: player.thisIsPlaying(item), 'no-preview': !item.preview_url, 'in-playlist': inPlaylist(item.external_ids.isrc)}", on-finish-render="ngRepeatFinished")
+      li.search-result(ng-repeat="item in searchResults.items | unique:'external_ids.isrc'", ng-class="{isPlaying: player.thisIsPlaying(item), isPaused: player.thisIsPlaying(item), 'no-preview': !item.preview_url, 'in-playlist': playlist.inPlaylist(item.external_ids.isrc)}", on-finish-render="ngRepeatFinished")
         .search-thumb.song-thumb(ng-click="player.toggle(item)")
           img(ng-src="{{item.album.images[2].url}}")
-        .search-info(ng-click="add(item)")
+        .search-info(ng-click="addSong(item)")
           h4.song-title.search-title {{item.name}}
           ul.search-artists.song-artists
             li.song-artist(ng-repeat="artist in item.artists")
               {{artist.name}}
-        .song-meta(ng-click="add(item)")
+        .song-meta(ng-click="addSong(item)")
           .song-duration {{item.duration_ms | mstotime}}
           .popularity 
             .popularity-bar(aria-valuenow="{{item.popularity}}", aria-valuemin="0", aria-valuemax="100", style="width: {{item.popularity}}%;")
               .sr-only Popularity {{item.popularity}}%
   
-  ul.playlist(ng-show="songs")
-    li.playlist-item(ng-repeat="song in songs", ng-class="{isPlaying: player.thisIsPlaying(song.track), isPaused: player.thisIsPaused(song.track), 'no-preview': !song.track.preview_url}")
+  ul.playlist(ng-show="playlist.songs")
+    li.playlist-item(ng-repeat="song in playlist.songs", ng-class="{isPlaying: player.thisIsPlaying(song.track), isPaused: player.thisIsPaused(song.track), 'no-preview': !song.track.preview_url}")
       .playlist-thumb.song-thumb(ng-click="player.toggle(song.track)")
         img(ng-src="{{song.track.album.images[1].url}}")
       .playlist-info
