@@ -36,9 +36,6 @@ angular.module "spotifyPlaylistCollab"
       $scope.$on 'songs.update', (event) ->
         $scope.getPlaylist()
         $scope.closeSearch()
-        
-      $scope.$on 'ngRepeatFinished', (ngRepeatFinishedEvent) -> 
-        resizeSearchResults()
       
       $scope.addSong = (song) ->
         playlist.addSong(userId, playlistId, song)
@@ -58,9 +55,3 @@ angular.module "spotifyPlaylistCollab"
         $scope.searchResults = null
         $scope.player.stop()
   ]
-  
-resizeSearchResults = () ->
-  $('#searchResults').css 'max-height', $(window).height() - $('#searchResults').offset().top - 20 + 'px'
-$ () ->
-  $(window).resize () ->
-    resizeSearchResults()
