@@ -2,7 +2,8 @@ angular.module 'spotifyPlaylistCollab', [
   'ngRoute',
   'spotify',
   'ui.unique',
-  'offClick']
+  'offClick',
+  'pasvaz.bindonce']
   .config [
     '$routeProvider',
     '$locationProvider',

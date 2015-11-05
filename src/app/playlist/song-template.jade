@@ -1,0 +1,7 @@
+.song(bindonce="song")
+  .playlist-thumb.song-thumb
+    img(bo-src="song.album.images[1].url")
+  .playlist-info
+    h4.song-title(bo-text="song.name")
+    ul.song-artists
+      li.song-artist(ng-repeat="artist in song.artists", bo-text="artist.name")

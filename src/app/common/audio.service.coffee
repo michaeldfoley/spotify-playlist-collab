@@ -1,4 +1,4 @@
 angular.module 'spotifyPlaylistCollab'
-  .factory 'audio', () ->
+  .service 'audio', () ->
     new Audio()
   

@@ -11,7 +11,7 @@ angular.module "spotifyPlaylistCollab"
       userId = 'michaeldfoley'
       playlistId = '5L5t7NUqA9xL1wvUFIoaYl'
       playlistOptions = {
-        fields: 'items(added_at,added_by(id),track(album(images,name),artists(name),external_ids,external_urls,id,name,preview_url))'
+        fields: ''
       }
       $rootScope.token = localStorage.getItem('spotify-token')
       $scope.player = player
