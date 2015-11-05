@@ -22,4 +22,4 @@
             .popularity-bar(aria-valuenow="{{item.popularity}}", aria-valuemin="0", aria-valuemax="100", style="width: {{item.popularity}}%;")
               .sr-only Popularity {{item.popularity}}%
   
-  mfplaylist(ng-if="playlist.songs" songs="playlist.songs")
+  mfplaylist(ng-if="token", user="{{userId}}", playlist="{{playlistId}}")

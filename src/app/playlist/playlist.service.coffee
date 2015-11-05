@@ -21,7 +21,7 @@ angular.module 'spotifyPlaylistCollab'
         if $rootScope.token && !playlist.inPlaylist(song.external_ids.isrc)
           Spotify.addPlaylistTracks(userId, playlistId, song.uri)
           .then () ->
-            $rootScope.$broadcast 'songs.update'
+            $rootScope.$emit 'songs.update'
             
     return playlist
   ]
