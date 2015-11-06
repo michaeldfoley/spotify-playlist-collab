@@ -8,7 +8,7 @@ angular.module 'spotifyPlaylistCollab'
       
       play: (song) ->
         url = song.preview_url
-        if player.isPlaying 
+        if player.isPlaying
           player.stop()
         if !player.isCurrent(url)
           player.current = audio.src = url
@@ -24,7 +24,7 @@ angular.module 'spotifyPlaylistCollab'
           $rootScope.$emit 'player.paused'
       
       stop: () ->
-        if player.isPlaying 
+        if player.isPlaying
           player.pause()
           player.previewImg = player.current = audio.src = null
           $rootScope.$emit 'player.stopped'
