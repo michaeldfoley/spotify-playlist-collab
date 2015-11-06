@@ -4,7 +4,7 @@ form.search(name="songSearch", ng-submit="search()", novalidate)
     input(type="search", id="songQuery", ng-model="songQuery", ng-change="search()", ng-model-options="{ debounce: 300 }", placeholder="Search for a song, artist, or album", autocomplete="off")
    
   ul.search-results#searchResults(ng-show="searchResults", off-click="closeSearch()", off-click-if="searchResults")
-    li.search-result.empty(ng-hide="searchResults.items.length") Sorry, no results.
+    li.search-result.empty(ng-if="searchResults.items.length === 0") Sorry, no results.
     
     li.search-result(bindonce="item" ng-repeat="item in searchResults.items | unique:'external_ids.isrc' track by item.external_ids.isrc", ng-class="{isPlaying: player.thisIsPlaying(item), isPaused: player.thisIsPaused(item), 'no-preview': !item.preview_url, 'in-playlist': playlist.inPlaylist(item.external_ids.isrc)}", on-finish-resize)
       .search-thumb.song-thumb(ng-click="player.toggle(item)")
