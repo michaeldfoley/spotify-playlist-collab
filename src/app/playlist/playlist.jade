@@ -1,25 +1,5 @@
 .container(ng-init="init()")
   button(ng-click="login()", ng-hide="token") Login
   
-  form.search(name="songSearch", ng-submit="search()", novalidate)
-    .form-group
-      label.search-label(for="songQuery") Add a song to the playlist
-      input(type="search", id="songQuery", ng-model="songQuery", ng-change="search()", ng-model-options="{ debounce: 300 }", placeholder="Search for a song, artist, or album", autocomplete="off")
-     
-    ul.search-results#searchResults(ng-show="searchResults", off-click="closeSearch()", off-click-if="searchResults")
-      li.search-result.empty(ng-hide="searchResults.items.length") Sorry, no results.
-      li.search-result(ng-repeat="item in searchResults.items | unique:'external_ids.isrc' track by item.external_ids.isrc", ng-class="{isPlaying: player.thisIsPlaying(item), isPaused: player.thisIsPlaying(item), 'no-preview': !item.preview_url, 'in-playlist': playlist.inPlaylist(item.external_ids.isrc)}", on-finish-resize)
-        .search-thumb.song-thumb(ng-click="player.toggle(item)")
-          img(ng-src="{{item.album.images[2].url}}")
-        .search-info(ng-click="addSong(item)")
-          h4.song-title.search-title {{item.name}}
-          ul.search-artists.song-artists
-            li.song-artist(ng-repeat="artist in item.artists")
-              {{artist.name}}
-        .song-meta(ng-click="addSong(item)")
-          .song-duration {{item.duration_ms | mstotime}}
-          .popularity 
-            .popularity-bar(aria-valuenow="{{item.popularity}}", aria-valuemin="0", aria-valuemax="100", style="width: {{item.popularity}}%;")
-              .sr-only Popularity {{item.popularity}}%
-  
+  mfsearch
   mfplaylist(ng-if="token", user="{{userId}}", playlist="{{playlistId}}")
