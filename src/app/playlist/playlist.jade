@@ -1,5 +1,13 @@
 .container(ng-init="init()")
-  button(ng-click="login()", ng-hide="token") Login
+  .spotify-login(ng-hide="token") 
+    p.lead In order to view and add to the playlist, please login with your spotify account.
+    button.spotify-button(ng-click="login()")
+      svg(aria-label="Login with Spotify")
+        use(xlink:href="/assets/icons/spotify.svg#login")
   
-  mfsearch
+  mfsearch(ng-if="token")
   mfplaylist(ng-if="token", user="{{userId}}", playlist="{{playlistId}}")
+  .spotify-listen(ng-if="token")
+    a(href="https://open.spotify.com/user/{{userId}}/playlist/{{playlistId}}")
+      svg(aria-label="Listen on Spotify")
+          use(xlink:href="/assets/icons/spotify.svg#listen")

@@ -27,3 +27,28 @@
     height: 250px;
   }
 }
+
+
+//
+// Login and buttons
+// --------------------------------------------------
+
+.spotify-login {
+  text-align: center;
+}
+.spotify-listen {
+  text-align: center;
+  
+  svg {
+    width: 400px;
+    height: 75px;
+  }
+}
+.spotify-button {
+  background: transparent;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  width: 270px;
+  height: 50px;
+}

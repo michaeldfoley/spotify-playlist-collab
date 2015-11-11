@@ -82,6 +82,12 @@ img {
   @include img-responsive;
 }
 
+// SVG sizing (make sure images don't scale beyond their parents)
+svg:not(:root) {
+  max-width: 100%;
+  max-height: 100%;
+}
+
 
 // Only display content to screen readers
 //
