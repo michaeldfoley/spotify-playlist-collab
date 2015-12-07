@@ -20,8 +20,6 @@
 }
 
 .playlist-thumb {
-  @include play-buttons-size(250px, 250px, 64px, true);
-  
   img {
     max-width: 100%;
     height: 250px;

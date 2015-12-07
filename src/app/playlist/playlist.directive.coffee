@@ -3,7 +3,7 @@ angular.module 'spotifyPlaylistCollab'
     restrict: 'E'
     replace: true
     scope: {
-      userId: "@user"
+      playlistOwnerId: "@owner"
       playlistId: "@playlist"
     }
       
@@ -14,7 +14,7 @@ angular.module 'spotifyPlaylistCollab'
       }
       scope.playlist = playlist
       getPlaylist = () ->
-        playlist.getPlaylist(scope.userId, scope.playlistId, playlistOptions)
+        playlist.getPlaylist(scope.playlistOwnerId, scope.playlistId, playlistOptions)
       getPlaylist()
       
       $rootScope.$on 'songs.update', () ->

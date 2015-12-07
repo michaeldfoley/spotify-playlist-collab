@@ -1,7 +1,8 @@
-.song(bindonce="song")
+.song(bindonce="song.track")
   .playlist-thumb.song-thumb
-    img(bo-src="song.album.images[1].url")
-  .playlist-info
-    h4.song-title(bo-text="song.name")
+    img(bo-src="song.track.album.images[1].url")
+  .song-info
+    h4.song-title(bo-text="song.track.name")
     ul.song-artists
-      li.song-artist(ng-repeat="artist in song.artists", bo-text="artist.name")
+      li.song-artist(ng-repeat="artist in song.track.artists", bo-text="artist.name")
+  .song-controls

@@ -75,8 +75,6 @@
   flex: 0 0 64px;
   z-index: $zindex-1;
   background-color: $body-bg;
-  
-  @include play-buttons-size(64px, 64px, 32px, true);
 }
 
 

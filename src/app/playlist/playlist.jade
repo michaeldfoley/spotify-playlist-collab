@@ -6,8 +6,8 @@
         use(xlink:href="/assets/icons/spotify.svg#login")
   
   mfsearch(ng-if="token")
-  mfplaylist(ng-if="token", user="{{userId}}", playlist="{{playlistId}}")
+  mfplaylist(ng-if="token", owner="{{playlistOwnerId}}", playlist="{{playlistId}}")
   .spotify-listen(ng-if="token")
-    a(href="https://open.spotify.com/user/{{userId}}/playlist/{{playlistId}}")
+    a(href="https://open.spotify.com/user/{{playlistOwnerId}}/playlist/{{playlistId}}")
       svg(aria-label="Listen on Spotify")
           use(xlink:href="/assets/icons/spotify.svg#listen")
