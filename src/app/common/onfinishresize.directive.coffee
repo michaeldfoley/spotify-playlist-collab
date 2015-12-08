@@ -7,7 +7,6 @@ angular.module 'spotifyPlaylistCollab'
         resizeTimer = null
 
         resizeResults = () ->
-          console.log 'resizing'
           resultsBox = angular.element(element.context.parentNode)
           resultsBox.css 'max-height', $window.innerHeight - resultsBox.offset().top - 20 + 'px'
           
