@@ -1,9 +1,10 @@
 angular.module 'spotifyPlaylistCollab'
-  .directive 'mfsong', ['$rootScope', 'player', ($rootScope, player) ->
+  .directive 'mfsong', ['$rootScope', 'player', 'playlist', ($rootScope, player, playlist) ->
     restrict: 'E'
     replace: true
     scope: {
       song: "="
+      playlistId: "=playlist"
     }
     templateUrl: 'app/playlist/song-template.html'
     link: (scope, elem, attrs) ->
@@ -15,8 +16,10 @@ angular.module 'spotifyPlaylistCollab'
         controls.on 'click', '.song-toggle', () ->
           player.toggle(track)
       
-      if scope.song.added_by.id == $rootScope.userId
+      if scope.song.added_by.id == $rootScope.userId && scope.playlistId
         controls.append('<div class="song-delete"></div>')
+        controls.on 'click', '.song-delete', () ->
+          playlist.removeSong(scope.playlistId.owner, scope.playlistId.id, scope.song)
       
       $rootScope.$on 'player.playing', () ->
         elem.removeClass 'isPaused'

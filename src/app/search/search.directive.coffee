@@ -14,7 +14,8 @@ angular.module 'spotifyPlaylistCollab'
         scope.closeSearch()
       
       scope.addSong = (song) ->
-        playlist.addSong(scope.userId, scope.playlistId, song)
+        if scope.playlistId
+          playlist.addSong(scope.playlistId.owner, scope.playlistId.id, song)
       
       scope.search = () ->
         if scope.songQuery.length < 3

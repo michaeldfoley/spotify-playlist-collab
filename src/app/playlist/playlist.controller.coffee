@@ -7,8 +7,9 @@ angular.module "spotifyPlaylistCollab"
     ($rootScope, $scope, Spotify, player) ->
       $rootScope.token = localStorage.getItem('spotify-token')
       $scope.player = player
-      $scope.playlistOwnerId = 'michaeldfoley'
-      $scope.playlistId = '5L5t7NUqA9xL1wvUFIoaYl'
+      $scope.playlistId =
+        owner: 'michaeldfoley'
+        id: '5L5t7NUqA9xL1wvUFIoaYl'
       
       $scope.init = () ->
         if $rootScope.token
