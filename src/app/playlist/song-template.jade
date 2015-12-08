@@ -1,8 +1,10 @@
-.song(bindonce="song.track")
+.song(bindonce="song.hasControls")
   .playlist-thumb.song-thumb
     img(bo-src="song.track.album.images[1].url")
+    .song-controls(bo-if="song.hasControls")
+      .song-toggle(bo-if="song.hasPreview")
+      .song-delete(bo-if="song.isOwner")
   .song-info
     h4.song-title(bo-text="song.track.name")
     ul.song-artists
       li.song-artist(ng-repeat="artist in song.track.artists", bo-text="artist.name")
-  .song-controls

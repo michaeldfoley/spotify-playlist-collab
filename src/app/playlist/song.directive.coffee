@@ -9,17 +9,16 @@ angular.module 'spotifyPlaylistCollab'
     templateUrl: 'app/playlist/song-template.html'
     link: (scope, elem, attrs) ->
       track = scope.song.track
-      controls = elem.children('.song-controls')
       
-      if track.preview_url
-        controls.prepend('<div class="song-toggle"></div>')
-        controls.on 'click', '.song-toggle', () ->
-          player.toggle(track)
+      scope.song.hasPreview = !!(track.preview_url)
+      scope.song.isOwner = !!(scope.song.added_by.id == $rootScope.userId && scope.playlistId)
+      scope.song.hasControls = !!(scope.song.hasPreview || scope.song.isOwner)
       
-      if scope.song.added_by.id == $rootScope.userId && scope.playlistId
-        controls.append('<div class="song-delete"></div>')
-        controls.on 'click', '.song-delete', () ->
-          playlist.removeSong(scope.playlistId.owner, scope.playlistId.id, scope.song)
+      elem.on 'click', '.song-toggle', () ->
+        player.toggle(track)
+      
+      elem.on 'click', '.song-delete', () ->
+        playlist.removeSong(scope.playlistId.owner, scope.playlistId.id, scope.song)
       
       $rootScope.$on 'player.playing', () ->
         elem.removeClass 'isPaused'
