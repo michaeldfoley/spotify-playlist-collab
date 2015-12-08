@@ -43,11 +43,9 @@
   display: flex;
   flex-flow: row wrap;
   align-items: center;
-  padding: 20px 0;
   border-bottom: 1px solid #D8D8D8;
   background: white;
   position: relative;
-  cursor: pointer;
   z-index: $zindex-1;
   
   &.empty {
@@ -58,6 +56,18 @@
   &:last-child {
     border-bottom: none;
   }
+}
+
+.search-meta {
+  width: 64px;
+  flex: 0 0 64px;
+  margin-left: 30px;
+}
+
+.search-info,
+.search-meta {
+  padding: 20px 0;
+  cursor: pointer;
 }
 
 .search-info {
@@ -75,6 +85,20 @@
   flex: 0 0 64px;
   z-index: $zindex-1;
   background-color: $body-bg;
+  margin: 20px 0;
+  
+  .song-controls {
+    cursor: pointer;
+  }
+}
+
+.song-controls:hover,
+.isPlaying,
+.isPaused { 
+  .search-toggle.song-toggle {
+    width: 50%;
+    height: 50%;
+  }
 }
 
 

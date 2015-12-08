@@ -6,14 +6,16 @@ form.search(name="songSearch", ng-submit="search()", novalidate)
   ul.search-results#searchResults(ng-show="searchResults", off-click="closeSearch()", off-click-if="searchResults")
     li.search-result.empty(ng-if="searchResults.items.length === 0") Sorry, no results.
     
-    li.search-result(bindonce="item" ng-repeat="item in searchResults.items | unique:'external_ids.isrc' track by item.external_ids.isrc", ng-class="{isPlaying: player.thisIsPlaying(item), isPaused: player.thisIsPaused(item), 'no-preview': !item.preview_url, 'in-playlist': playlist.inPlaylist(item.external_ids.isrc)}", on-finish-resize)
+    li.search-result(bindonce="item" ng-repeat="item in searchResults.items | unique:'external_ids.isrc' track by item.external_ids.isrc", ng-class="{isPlaying: player.thisIsPlaying(item), isPaused: player.thisIsPaused(item), 'in-playlist': playlist.inPlaylist(item.external_ids.isrc)}", on-finish-resize)
       .search-thumb.song-thumb(ng-click="player.toggle(item)")
         img(bo-src="item.album.images[2].url")
+        .song-controls(bo-if="item.preview_url")
+          .song-toggle.search-toggle
       .search-info(ng-click="addSong(item)")
         h4.song-title.search-title(bo-text="item.name")
-        ul.search-artists.song-artists
+        ul.song-artists
           li.song-artist(ng-repeat="artist in item.artists" bo-text="artist.name")
-      .song-meta(ng-click="addSong(item)")
+      .search-meta(ng-click="addSong(item)")
         .song-duration(bo-text="item.duration_ms | mstotime")
         .popularity 
           .popularity-bar(aria-valuenow="{{item.popularity}}", aria-valuemin="0", aria-valuemax="100", style="width: {{item.popularity}}%;")

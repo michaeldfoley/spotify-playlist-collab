@@ -8,16 +8,17 @@
 }
 
 
+//
+
+.song-thumb {
+  position:relative;
+}
+
+
 // Song info
 
 .song-title {
   margin-bottom: 0;
-}
-
-.song-meta {
-  width: 64px;
-  flex: 0 0 64px;
-  margin-left: 30px;
 }
 
 .song-duration {
@@ -49,7 +50,7 @@
 .song-controls {
   position: absolute;
   width: 100%;
-  height: 250px;
+  height: 100%;
   top: 0;
   display: flex;
   justify-content: center;
@@ -100,8 +101,6 @@
   
   .song-toggle,
   .song-delete {
-    height: 25%;
-    width: 25%;
     opacity: .8;
     margin: 0 7px;
     
