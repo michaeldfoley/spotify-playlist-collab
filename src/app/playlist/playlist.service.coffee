@@ -1,5 +1,5 @@
 angular.module 'spotifyPlaylistCollab'
-  .factory 'playlist', ['$rootScope', 'Spotify', ($rootScope, Spotify) ->
+  .factory 'playlist', ['$rootScope', 'Spotify', '$filter', ($rootScope, Spotify, $filter) ->
     
     getPlaylistCount = (playlistOwner, playlistId) ->
       if $rootScope.token
@@ -22,7 +22,6 @@ angular.module 'spotifyPlaylistCollab'
           getPlaylistCount(playlistOwner, playlistId)
             .then (count) ->
               playlistOptions.offset = if count.total > 100 then count.total - 100 else 0
-              
               Spotify.getPlaylistTracks(playlistOwner, playlistId, playlistOptions)
                 .then (data) ->
                   playlist.songs = data.items
@@ -36,15 +35,23 @@ angular.module 'spotifyPlaylistCollab'
       
       addSong: (playlistOwner, playlistId, song) ->
         if $rootScope.token && !playlist.inPlaylist(song.external_ids.isrc)
+          playlistItem = {added_at: $filter('date')(Date.now(), 'yyyy-MM-ddTHH:mm:ss', 'UTC') + 'Z', added_by: {id: $rootScope.userId}, track: song}
+          
+          playlist.songs.push(playlistItem)
+          playlist.songIds.push(song.external_ids.isrc)
+          
           Spotify.addPlaylistTracks(playlistOwner, playlistId, song.uri)
             .then () ->
-              $rootScope.$emit 'songs.update'
+              $rootScope.$emit('songs.update', {type: 'add'})
             
       removeSong: (playlistOwner, playlistId, song) ->
         if song.added_by.id == $rootScope.userId
+          playlist.songs.splice(playlist.songs.indexOf(song), 1)
+          playlist.songIds.splice(playlist.songIds.indexOf(song.track.external_ids.isrc), 1)
+          
           Spotify.removePlaylistTracks(playlistOwner, playlistId, song.track.id)
             .then () ->
-              $rootScope.$emit 'songs.update'
+              $rootScope.$emit('songs.update', {type: 'remove'})
             
     return playlist
   ]
