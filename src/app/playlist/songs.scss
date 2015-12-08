@@ -54,7 +54,9 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  @include transition(opacity 0.3s ease);
+  @include transition-property(opacity, background-color);
+  @include transition-duration(0.3s);
+  @include transition-timing-function(ease);
 }
 
 .song-toggle,
@@ -66,7 +68,9 @@
   height: 0;
   width: 0;
   opacity: 0;
-  @include transition(opacity 0.3s ease, transform 0.3s ease-out, width 0.3s ease-out, height 0.3s ease-out);
+  @include transition-property(opacity, transform, width, height);
+  @include transition-duration(0.3s);
+  @include transition-timing-function(ease-out);
   
   &:after {
     content:'';
@@ -80,6 +84,7 @@
 }
 
 .song-controls:hover {
+  background-color: rgba(255,255,255,0.2);
   .song-toggle,
   .song-delete {
     height: 25%;
