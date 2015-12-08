@@ -61,16 +61,11 @@
 
 .song-toggle,
 .song-delete {
-  background-color: #101010;
-  border-radius: 50%;
   cursor: pointer;
-  margin: 0 7px;
   height: 0;
   width: 0;
   opacity: 0;
-  @include transition-property(opacity, transform, width, height);
-  @include transition-duration(0.3s);
-  @include transition-timing-function(ease-out);
+  @include transition(all 0.3s ease-out);
   
   &:after {
     content:'';
@@ -79,22 +74,51 @@
     height: 100%;
     background-repeat: no-repeat;
     background-position: center center;
-    background-size: 50% 50%;
   }
 }
 
+.song-toggle {
+  background-color: #101010;
+  border-radius: 50%;
+  border: 1px solid #ffffff;
+  
+  &:after {
+    background-size: 50% 50%;
+  }
+  
+  &:hover {
+    box-shadow: 0px 0px 0px 2px #ffffff;
+  }
+}
+
+.song-delete:after {
+  background-size: contain;
+}
+
 .song-controls:hover {
-  background-color: rgba(255,255,255,0.2);
+  background-color: rgba(0,0,0,0.4);
+  
   .song-toggle,
   .song-delete {
     height: 25%;
     width: 25%;
     opacity: .8;
+    margin: 0 7px;
     
     &:hover {
       opacity: 1;
       transform: scale(1.1);
     }
+  }
+  
+  .song-toggle {
+    height: 25%;
+    width: 25%;
+  }
+  
+  .song-delete {
+    height: 10%;
+    width: 10%;
   }
 }
 
