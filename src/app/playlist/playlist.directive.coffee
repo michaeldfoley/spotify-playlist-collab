@@ -13,8 +13,5 @@ angular.module 'spotifyPlaylistCollab'
       getPlaylist = () ->
         playlist.getPlaylist(scope.playlistId.owner, scope.playlistId.id, playlistOptions)
       getPlaylist()
-      
-      $rootScope.$on 'songs.update', (event, args) ->
-        console.log args
         
   ]

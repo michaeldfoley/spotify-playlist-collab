@@ -4,7 +4,12 @@ angular.module 'spotifyPlaylistCollab'
     getPlaylistCount = (playlistOwner, playlistId) ->
       if $rootScope.token
         Spotify.getPlaylistTracks(playlistOwner, playlistId, {fields:'total'})
-          
+    
+    songsUpdated = (type, song) ->
+      $rootScope.$emit 'songs.update',
+        type: type
+        song: song
+       
     playlist =
     
       getUserId: () ->
@@ -42,7 +47,7 @@ angular.module 'spotifyPlaylistCollab'
           
           Spotify.addPlaylistTracks(playlistOwner, playlistId, song.uri)
             .then () ->
-              $rootScope.$emit('songs.update', {type: 'add'})
+              songsUpdated('add', playlistItem)
             
       removeSong: (playlistOwner, playlistId, song) ->
         if song.added_by.id == $rootScope.userId
@@ -51,7 +56,7 @@ angular.module 'spotifyPlaylistCollab'
           
           Spotify.removePlaylistTracks(playlistOwner, playlistId, song.track.id)
             .then () ->
-              $rootScope.$emit('songs.update', {type: 'remove'})
+              songsUpdated('remove', song)
             
     return playlist
   ]

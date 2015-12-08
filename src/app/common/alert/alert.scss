@@ -1,0 +1,30 @@
+//
+// Alert
+// --------------------------------------------------
+
+.alert-container {
+  text-align: center;
+  position:absolute;
+  width: 100%;
+  top: 0;
+}
+
+.alert {
+  display: inline-block;
+  padding: 10px 40px;
+  @include animation(slideDown .2s ease-out);
+}
+
+.alert-default {
+  background: #eee;
+  border: 1px solid darken(#eee, 10px);
+  border-top: 0;
+}
+
+.alert-adding {
+  @include animation(slideDown .3s ease-out);
+}
+
+.alert-removing {
+  @include animation(slideUp .3s ease-out);
+}

@@ -44,3 +44,26 @@
     @include transform(scale(0.5));
   }
 }
+
+@include keyframes(slideDown) {
+  from {
+    opacity: 0;
+    @include transform(translate3d(0, -100%, 0));
+  }
+  
+  to {
+    opacity: 1;
+    @include transform(none);
+  }
+}
+
+@include keyframes(slideUp) {
+  from {
+    opacity: 1;
+  }
+  
+  to {
+    opacity: 0;
+    @include transform(translate3d(0, -100%, 0));
+  }
+}
