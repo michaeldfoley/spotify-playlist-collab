@@ -1,0 +1,46 @@
+//
+// Animations
+// --------------------------------------------------
+
+// Add remove
+
+.deleting {
+  @include animation(zoomOut .3s ease-out);
+}
+
+.adding {
+  @include animation(zoomIn .3s ease-out);
+}
+
+@include keyframes(spin) {
+  from {
+    @include transform(rotate(0deg));
+  }
+  to {
+    @include transform(rotate(360deg));
+  }
+}
+
+@include keyframes(zoomIn) {
+  from {
+    opacity: 0;
+    @include transform(scale(0.5));
+  }
+  
+  to {
+    opacity: 1;
+    @include transform(scale(1));
+  }
+}
+
+@include keyframes(zoomOut) {
+  from {
+    opacity: 1;
+    @include transform(scale(1));
+  }
+  
+  to {
+    opacity: 0;
+    @include transform(scale(0.5));
+  }
+}

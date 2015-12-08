@@ -18,7 +18,10 @@ angular.module 'spotifyPlaylistCollab'
         player.toggle(track)
       
       elem.on 'click', '.song-delete', () ->
-        playlist.removeSong(scope.playlistId.owner, scope.playlistId.id, scope.song)
+        elem.parent().addClass('deleting')
+          .one 'webkitAnimationEnd oanimationend msAnimationEnd animationend', (e) ->
+            playlist.removeSong(scope.playlistId.owner, scope.playlistId.id, scope.song)
+            return
       
       $rootScope.$on 'player.playing', () ->
         elem.removeClass 'isPaused'

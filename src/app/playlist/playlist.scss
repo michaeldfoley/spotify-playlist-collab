@@ -17,6 +17,11 @@
 .playlist-item {
   width: 250px;
   margin: 0 15px 30px 15px;
+  @include animation(zoomIn .3s ease-out);
+  
+  &.deleting {
+    @include animation(zoomOut .3s ease-out);
+  }
 }
 
 .playlist-thumb {
@@ -49,21 +54,4 @@
   margin: 0;
   width: 270px;
   height: 50px;
-}
-
-
-//
-// Playlist-related Animations
-// --------------------------------------------------
-
-@include keyframes(fadeInLeft) {
-  from {
-    opacity: 0;
-    @include transform(translate3d(-100%, 0, 0));
-  }
-  
-  to {
-    opacity: 1;
-    @include transform(none);
-  }
 }
