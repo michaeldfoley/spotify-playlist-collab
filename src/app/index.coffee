@@ -13,9 +13,6 @@ angular.module 'spotifyPlaylistCollab', [
     
       $routeProvider
         .when '/',
-          templateUrl: 'app/main/main.html'
-          controller: 'MainCtrl'
-        .when '/playlist',
           templateUrl: 'app/playlist/playlist.html'
           controller: 'PlaylistCtrl'
         .otherwise
